@@ -42,7 +42,7 @@ public class SelectQuery  {
 	
 	
 	public static Table naturalJoin(ITable table1, ITable table2) {
-		Schema resultSchema = table1.getSchema().naturaljoin(table2.getSchema());
+		Schema resultSchema = table1.getSchema().naturaljoin(table2.getSchema()); //lab10
 		Table result = new Table(resultSchema);
 		ArrayList<String> joinColumns  = new ArrayList<>();
 		// TODO  find the list of join column of the 2 tables
@@ -66,6 +66,7 @@ public class SelectQuery  {
 		for (Tuple t: table) {
 			// TODO 
 			// if tuple t satisfies the condition, insert t into the result table.
+			if (cond.eval(t)) result.insert(t.project(s));
 		}
 		return result;
 	}
