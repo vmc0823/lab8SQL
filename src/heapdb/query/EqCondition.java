@@ -29,8 +29,8 @@ public class EqCondition extends Condition {
 	
 	@Override
 	public Boolean eval(Tuple tuple) {
-		// TODO compare the value of the tuple column to the value variable.
-		throw new UnsupportedOperationException();
+		Object value = tuple.get(colName);
+		return value.equals(value);
 	}
 	
 	@Override
