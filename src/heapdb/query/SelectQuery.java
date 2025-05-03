@@ -45,12 +45,30 @@ public class SelectQuery  {
 		Schema resultSchema = table1.getSchema().naturaljoin(table2.getSchema()); //lab10
 		Table result = new Table(resultSchema);
 		ArrayList<String> joinColumns  = new ArrayList<>();
-		// TODO  find the list of join column of the 2 tables
+		//find the list of join column of the 2 table
+		Schema s1 = table1.getSchema(), s2 = table2.getSchema();
+		for (int i = 0; i < s1.size(); i++) {
+			String col = s1.getName(i); //first schema here
+			if (s2.getColumnIndex(col) >= 0) {
+				joinColumns.add(col);
+			}
+		}
 		for (Tuple t1: table1) {
 			for (Tuple t2: table2) {
-				// TODO if t1 matches all join columns of t2
-				// TODO then insert the join of t1 and t2 into 
-				//      the result table
+				//if t1 matches all join columns of t2
+				boolean match = true;
+				for (String col: joinColumns) {
+					if (!t1.get(col).equals(t2.get(col))) {
+						match = false;
+						break;
+					}
+				}
+				//then insert the join of t1 and t2 into
+				if (match) {
+					Tuple joined = Tuple.joinTuple(resultSchema, t1, t2);
+					//      the result table
+					result.insert(joined);
+				}
 			}
 		}
 		return result;
