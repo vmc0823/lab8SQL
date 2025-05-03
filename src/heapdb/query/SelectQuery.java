@@ -59,14 +59,18 @@ public class SelectQuery  {
 	public ITable eval(ITable table) {
 		Schema s;
 		// if there is a projection operation, make the new schema
-		if (colNames==null) s = table.getSchema();
-		else s = table.getSchema().project(colNames);
+		if (colNames==null) {
+			s = table.getSchema();
+		} else {
+			s = table.getSchema().project(colNames);
+		}
 		
 		Table result = new Table(s);
 		for (Tuple t: table) {
-			// TODO 
 			// if tuple t satisfies the condition, insert t into the result table.
-			if (cond.eval(t)) result.insert(t.project(s));
+			if (cond.eval(t)) {
+				result.insert(t.project(s));
+			}
 		}
 		return result;
 	}
