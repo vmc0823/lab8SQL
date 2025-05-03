@@ -20,8 +20,7 @@ public class OrCondition extends Condition {
 	
 	@Override
 	public Boolean eval(Tuple tuple) {
-		// TODO 
-		throw new UnsupportedOperationException();
+		return cond1.eval(tuple) || cond2.eval(tuple);
 	}
 	
 	@Override
