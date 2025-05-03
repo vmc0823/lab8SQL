@@ -29,8 +29,8 @@ public class EqCondition extends Condition {
 	
 	@Override
 	public Boolean eval(Tuple tuple) {
-		Object value = tuple.get(colName);
-		return value.equals(value);
+		Object fieldValue = tuple.get(colName);
+		return fieldValue.equals(value);
 	}
 	
 	@Override
